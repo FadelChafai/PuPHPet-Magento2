@@ -44,8 +44,8 @@ Database password : magento2
 ```
 Magento Back office user
 ```
-Database user : fadel
-Database password : fadelChafai2017
+user name : fadel
+password : fadelChafai2017
 ```
 
 ## Urls
