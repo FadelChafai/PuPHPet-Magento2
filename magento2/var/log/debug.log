@@ -1,0 +1,2 @@
+[2017-08-24 17:36:16] main.DEBUG: cache_invalidate:  {"method":"GET","url":"http://local.magento2.dev/","invalidateInfo":{"tags":["interception","CONFIG"],"mode":"matchingTag"},"is_exception":false} []
+[2017-08-24 19:51:42] main.DEBUG: cache_invalidate:  {"method":"POST","url":"http://local.magento2.dev/index.php/admin/admin/index/index/key/8f096d925b2a29990dbc7810fd9918d97f696ebb938d61c168f75d3eb10527f1/","invalidateInfo":{"tags":["BACKEND_MAINMENU"],"mode":"matchingAnyTag"},"is_exception":false} []

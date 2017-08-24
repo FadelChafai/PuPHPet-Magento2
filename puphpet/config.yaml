@@ -1,0 +1,464 @@
+vagrantfile:
+    target: local
+    vm:
+        provider:
+            local:
+                box: puphpet/ubuntu1604-x64
+                box_url: 'false'
+                box_version: '0'
+                chosen_virtualizer: virtualbox
+                virtualizers:
+                    virtualbox:
+                        modifyvm:
+                            natdnshostresolver1: false
+                        showgui: 0
+                    vmware:
+                        numvcpus: 1
+                    parallels:
+                        linked_clone: 0
+                        check_guest_tools: 0
+                        update_guest_tools: 0
+                machines:
+                    vflm_9io968fp959p:
+                        id: machine1
+                        hostname: magento2.puphpet
+                        network:
+                            private_network: 192.168.56.101
+                            forwarded_port:
+                                vflmnfp_oyb5i802a0u2:
+                                    host: '7798'
+                                    guest: '22'
+                        memory: '6120'
+                        cpus: '3'
+        provision:
+            puppet:
+                manifests_path: puphpet/puppet/manifests
+                module_path:
+                    - puphpet/puppet/modules
+                    - puphpet/puppet/manifests
+                options:
+                    - '--verbose'
+                    - '--hiera_config /vagrant/puphpet/puppet/hiera.yaml'
+        synced_folder:
+            vflsf_ugwhg555gt92:
+                owner: www-data
+                group: www-data
+                source: ./
+                target: /var/www
+                sync_type: default
+                smb:
+                    smb_host: ''
+                    smb_username: ''
+                    smb_password: ''
+                    mount_options:
+                        dir_mode: '0775'
+                        file_mode: '0664'
+                rsync:
+                    args:
+                        - '--verbose'
+                        - '--archive'
+                        - '-z'
+                    exclude:
+                        - .vagrant/
+                        - .git/
+                    auto: 'true'
+        usable_port_range:
+            start: 10200
+            stop: 10500
+        post_up_message: ''
+    ssh:
+        host: 'false'
+        port: 'false'
+        private_key_path: 'false'
+        username: vagrant
+        guest_port: 'false'
+        keep_alive: '1'
+        forward_agent: 'false'
+        forward_x11: 'false'
+        shell: 'bash -l'
+        insert_key: 'false'
+    vagrant:
+        host: detect
+    proxy:
+        http: ''
+        https: ''
+        ftp: ''
+        no_proxy: ''
+server:
+    install: '1'
+    packages:
+        - vim
+        - htop
+        - git
+        - sshpass
+users_groups:
+    install: '1'
+    groups: {  }
+    users: {  }
+locale:
+    install: '1'
+    settings:
+        default_locale: en_US.UTF-8
+        locales:
+            - en_GB.UTF-8
+            - en_US.UTF-8
+        timezone: Europe/Paris
+firewall:
+    install: '1'
+    rules: {  }
+resolv:
+    install: '1'
+    nameservers:
+        - 8.8.8.8
+        - 8.8.4.4
+    domainname: ''
+    searchpath: {  }
+cron:
+    install: '0'
+    jobs:
+        cj_515ed9lfkgdt:
+            name: dump-db
+            user: root
+            command: sh /vagrant/magento2/tools/batch/backupDb.sh
+            minute: '*'
+            hour: '11'
+            weekday: '*'
+            month: '*'
+            monthday: '*'
+nginx:
+    install: '1'
+    settings:
+        version: present
+        default_vhost: 1
+        proxy_buffers: '8 256k'
+        proxy_buffer_size: 128k
+        proxy_connect_timeout: 600s
+        proxy_send_timeout: 600s
+        proxy_read_timeout: 600s
+        names_hash_bucket_size: 128
+    upstreams: {  }
+    vhosts:
+        nxv_gl46nmdpyrhi:
+            server_name: local.magento2.dev
+            server_aliases:
+                - admin.magento2.dev
+                - api.magento2.dev
+                - phpmyadmin.magento2.dev
+                - argan.dev
+            www_root: /var/www/magento2
+            listen_port: '80'
+            client_max_body_size: 1m
+            ssl: '0'
+    proxies: {  }
+apache:
+    install: '0'
+    settings:
+        version: 2.4
+        user: www-data
+        group: www-data
+        default_vhost: true
+        manage_user: false
+        manage_group: false
+        sendfile: 0
+    modules:
+        - proxy_fcgi
+        - rewrite
+    vhosts:
+        av_eec4ly6rw1zz:
+            servername: awesome.dev
+            serveraliases:
+                - www.awesome.dev
+            docroot: /var/www/awesome/web
+            port: '80'
+            setenvif:
+                - 'Authorization "(.*)" HTTP_AUTHORIZATION=$1'
+            custom_fragment: ''
+            ssl: '0'
+            ssl_cert: LETSENCRYPT
+            ssl_key: LETSENCRYPT
+            ssl_chain: LETSENCRYPT
+            ssl_certs_dir: LETSENCRYPT
+            ssl_protocol: ''
+            ssl_cipher: ''
+            directories:
+                avd_1l1oum64m89i:
+                    path: /var/www/awesome/web
+                    directoryindex: 'index.php app.dev'
+                    options:
+                        - Indexes
+                        - FollowSymlinks
+                        - MultiViews
+                    allow_override:
+                        - All
+                    require:
+                        - 'all granted'
+                    custom_fragment: ''
+                    provider: directory
+            files_match:
+                avfm_d1s5j1iq5w2e:
+                    path: (app_dev|config)\.php$
+                    sethandler: 'proxy:fcgi://127.0.0.1:9000'
+                    setenv:
+                        - 'APP_ENV dev'
+                    custom_fragment: ''
+                    provider: filesmatch
+                avfm_dpete9ujhcio:
+                    path: app\.php$
+                    sethandler: 'proxy:fcgi://127.0.0.1:9000'
+                    setenv:
+                        - 'APP_ENV prod'
+                    custom_fragment: ''
+                    provider: filesmatch
+                avfm_8ltckovj521h:
+                    path: \.php$
+                    sethandler: 'proxy:fcgi://127.0.0.1:9000'
+                    custom_fragment: ''
+                    provider: filesmatch
+letsencrypt:
+    install: '1'
+    settings:
+        email: ''
+        webserver_service: ''
+    domains: {  }
+php:
+    install: '1'
+    settings:
+        version: '7.0'
+    modules:
+        php:
+            - cli
+            - intl
+            - xml
+            - mcrypt
+            - mbstring
+            - imagick
+            - soap
+            - gd
+            - curl
+            - bcmath
+            - xsl
+            - zip
+        pear: {  }
+        pecl:
+            - redis
+    ini:
+        display_errors: 'On'
+        date.timezone: 'Europe/Paris'
+        default_charset: 'UTF-8'
+        default_socket_timeout: '5'
+        error_reporting: 'E_ALL'
+        json.precision: '-1'
+        mysql.allow_persistent: 'On'
+        mysql.cache_size: '2000'
+        mysql.trace_mode: 'Off'
+        mysql.max_links: '-1'
+        max_execution_time: '18000'
+        max_input_vars: '10000'
+        memory_limit: '2048M'
+        output_buffering: '4096'
+        pdo_mysql.cache_size: '2000'
+        post_max_size: '100M'
+        precision: '-1'
+        realpath_cache_size: '32k'
+        realpath_cache_ttl: '7200'
+        suhosin.post.max_value_length: '67108864'
+        suhosin.post.max_vars: '10000'
+        suhosin.request.max_vars: '10000'
+        session.auto_start : 'off'
+        session.save_handler: 'files'
+        session.entropy_length: '512'
+        session.entropy_file: '/dev/urandom'
+        session.gc_maxlifetime: '86400'
+        serialize_precision: '100'
+        suhosin.session.cryptua : 'off'
+        sendmail_path: '/usr/local/bin/mailhog sendmail fadelchafai@gmail.com'
+        serialize_precision: '-1'
+        upload_max_filesize: '100M'
+        zlib.output_compression : 'on'
+    fpm_ini:
+        error_log: /var/log/php-fpm.log
+    fpm_pools:
+        phpfp_buo9m5aohwxl:
+            ini:
+                prefix: www
+                listen: '127.0.0.1:9000'
+                security.limit_extensions: .php
+                user: www-user
+                group: www-data
+                pm: dynamic
+                pm.max_children: 70
+                pm.start_servers: 10
+                pm.min_spare_servers: 5
+                pm.max_spare_servers: 70
+                'php_admin_value\[error_log\]': /var/log/php-fpm/phpfp_twefne29ofwq-error.log
+                'php_admin_flag\[log_errors\]': 'on'
+    composer: '0'
+    composer_home: ''
+xdebug:
+    install: '0'
+    settings:
+         xdebug.idekey : debugit
+         xdebug.default_enable : 1
+         xdebug.remote_autostart : 0
+         xdebug.remote_connect_back : 1
+         xdebug.remote_enable : 1
+         xdebug.remote_handler : dbgp
+         xdebug.remote_host : 0.0.0.0
+         xdebug.remote_port : 9000
+         xdebug.show_local_vars : 1
+         xdebug.var_display_max_depth : -1
+         xdebug.var_display_max_children : -1
+         xdebug.var_display_max_data : -1
+         xdebug.remote_log : /var/www/xdebug.log
+         xdebug.remote_connect_back : true
+         xdebug.idekey : MY_AWESOME_KEY
+         xdebug.max_nesting_level : 1500
+blackfire:
+    install: '0'
+    settings:
+        server_id: ''
+        server_token: ''
+        agent:
+            http_proxy: ''
+            https_proxy: ''
+            log_file: stderr
+            log_level: '1'
+        php:
+            agent_timeout: '0.25'
+            log_file: ''
+            log_level: '1'
+xhprof:
+    install: '0'
+wpcli:
+    install: '0'
+    version: v1.1.0
+drush:
+    install: '0'
+    version: 8.0.5
+ruby:
+    install: '1'
+    versions:
+        rv_n6ya4a195fbh:
+            default: '1'
+            bundler: '1'
+            version: 2.3.1
+            gems:
+                - deep_merge@1.0.1
+                - activesupport@4.2.6
+                - vine@0.2
+python:
+    install: '0'
+    packages: {  }
+    versions: {  }
+nodejs:
+    install: '1'
+    settings:
+        version: '7'
+    npm_packages:
+        - gulp
+        - bower
+mariadb:
+    install: '0'
+    settings:
+        version: '10.1'
+        root_password: '123'
+        override_options: {  }
+    users:
+        mariadbnu_vdyawzpst73o:
+            name: dbuser
+            password: '123'
+    databases:
+        mariadbnd_e8jqwk5s6uol:
+            name: dbname
+            sql: ''
+    grants:
+        mariadbng_nanglhn2cc71:
+            user: dbuser
+            table: '*.*'
+            privileges:
+                - ALL
+mysql:
+    install: '1'
+    settings:
+        version: '5.7'
+        root_password: '12345'
+        override_options: {  }
+    users:
+        mysqlnu_2bxznmr3jjzk:
+            name: magento2
+            password: magento2
+    databases:
+        mysqlnd_t4wdvdagd6vp:
+            name: magento2
+            sql:  '/vagrant/puphpet/files/config/sql/magento2.sql'
+    grants:
+        mysqlng_4py0pion9233:
+            user: magento2
+            table: '*.*'
+            privileges:
+                - ALL
+postgresql:
+    install: '0'
+    settings:
+        global:
+            encoding: UTF8
+            version: '9.6'
+        server:
+            postgres_password: '123'
+    databases: {  }
+    users: {  }
+    grants: {  }
+mongodb:
+    install: '0'
+    settings:
+        bind_ip: 127.0.0.1
+        port: '27017'
+    globals:
+        version: 2.6.0
+    databases: {  }
+redis:
+    install: '1'
+    settings:
+        port: '6379'
+sqlite:
+    install: '0'
+    databases: {  }
+mailhog:
+    install: '1'
+    settings:
+        smtp_ip: 0.0.0.0
+        smtp_port: 1025
+        http_ip: 0.0.0.0
+        http_port: '8025'
+        path: /usr/local/bin/mailhog
+beanstalkd:
+    install: '0'
+    settings:
+        listenaddress: 0.0.0.0
+        listenport: '11300'
+        maxjobsize: '65535'
+        maxconnections: '1024'
+        binlogdir: /var/lib/beanstalkd/binlog
+        binlogfsync: null
+        binlogsize: '10485760'
+    beanstalk_console: 0
+rabbitmq:
+    install: '0'
+    settings:
+        port: '5672'
+    users: {  }
+    vhosts: {  }
+    plugins: {  }
+elastic_search:
+    install: '0'
+    settings:
+        version: 2.3.1
+        java_install: true
+    instances:
+        esi_ze79dergskny:
+            name: prometheus
+solr:
+    install: '0'
+    settings:
+        version: 5.5.2
+        port: '8984'
