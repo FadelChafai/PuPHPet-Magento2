@@ -3,6 +3,7 @@
 
 1 - Download & install Vagrant and Virtualbox
 
+MAC OS
 ```
 https://releases.hashicorp.com/vagrant/1.9.8/vagrant_1.9.8.dmg
 http://download.virtualbox.org/virtualbox/5.1.26/VirtualBox-5.1.26-117224-OSX.dmg
