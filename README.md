@@ -36,13 +36,13 @@ destroy vm : vagrant destroy
 ```
 ## Magento 2
 
-###Database
+Database
 ```
 Database name : magento2
 Database user : magento2
 Database password : magento2
 ```
-###Magento Back office user
+Magento Back office user
 ```
 Database user : fadel
 Database password : fadelChafai2017
