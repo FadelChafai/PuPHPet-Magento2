@@ -139,12 +139,12 @@ nginx:
     upstreams: {  }
     vhosts:
         nxv_gl46nmdpyrhi:
-            server_name: local.magento2.dev
+            server_name: local.magento2.local
             server_aliases:
-                - admin.magento2.dev
-                - api.magento2.dev
-                - phpmyadmin.magento2.dev
-                - argan.dev
+                - admin.magento2.local
+                - api.magento2.local
+                - phpmyadmin.magento2.local
+                - argan.local
             www_root: /var/www/magento2
             listen_port: '80'
             client_max_body_size: 1m
@@ -165,9 +165,9 @@ apache:
         - rewrite
     vhosts:
         av_eec4ly6rw1zz:
-            servername: awesome.dev
+            servername: awesome.local
             serveraliases:
-                - www.awesome.dev
+                - www.awesome.local
             docroot: /var/www/awesome/web
             port: '80'
             setenvif:
@@ -183,7 +183,7 @@ apache:
             directories:
                 avd_1l1oum64m89i:
                     path: /var/www/awesome/web
-                    directoryindex: 'index.php app.dev'
+                    directoryindex: 'index.php app.local'
                     options:
                         - Indexes
                         - FollowSymlinks

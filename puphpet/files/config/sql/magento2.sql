@@ -1832,7 +1832,7 @@ CREATE TABLE `core_config_data` (
 --
 
 INSERT INTO `core_config_data` (`config_id`, `scope`, `scope_id`, `path`, `value`) VALUES
-(1, 'default', 0, 'web/unsecure/base_url', 'http://local.magento2.dev/'),
+(1, 'default', 0, 'web/unsecure/base_url', 'http://local.magento2.local/'),
 (2, 'default', 0, 'general/region/display_all', '1'),
 (3, 'default', 0, 'general/region/state_required', 'AT,BR,CA,CH,EE,ES,FI,LT,LV,RO,US'),
 (4, 'default', 0, 'catalog/category/root_id', '2');
