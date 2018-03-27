@@ -139,8 +139,9 @@ nginx:
     upstreams: {  }
     vhosts:
         nxv_gl46nmdpyrhi:
-            server_name: local.magento2.local
+            server_name: magento2.local
             server_aliases:
+                - local.magento2.local
                 - admin.magento2.local
                 - api.magento2.local
                 - phpmyadmin.magento2.local
