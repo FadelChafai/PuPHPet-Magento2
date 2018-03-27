@@ -53,10 +53,10 @@ password : fadelChafai2017
 
 List (and links) of the apps installed on the machine: http://magento2.dev/
 ```
-  [To show links below] http://magento2.dev
-  [PHP Myadmin] http://phpmyadmin.magento2.dev
-  [Mailhog] http://magento2.dev:8025
-  [Front Magento] http://local.magento2.dev
-  [Back Magento] http://local.magento2.dev/admin
-  [Simple web site] http://myapp.dev
+  [To show links below] http://magento2.local
+  [PHP Myadmin] http://phpmyadmin.magento2.local
+  [Mailhog] http://magento2.local:8025
+  [Front Magento] http://local.magento2.local
+  [Back Magento] http://local.magento2.local/admin
+  [Simple web site] http://myapp.local
 ``` 
