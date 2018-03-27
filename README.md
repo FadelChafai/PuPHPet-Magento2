@@ -22,7 +22,7 @@ Git clone https://github.com/FadelChafai/PuPHPet-Magento2.git
  
 ```Shell
 cd PuPHPet-Magento2
-./initVagrant.sh
+./install.sh
 ```
 
 ## Vagrant commands (https://www.vagrantup.com/docs/cli/)
