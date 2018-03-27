@@ -1,3 +1,4 @@
 .vagrant
 .idea
 magento2/var/cache
+magento2/var/log
