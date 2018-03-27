@@ -41,7 +41,7 @@ Necessary parameters must be passed to command line with "J" prefix: "-J<paramet
 
 Example:
 > cd /directory_of_jMeter/bin/
-> jmeter -n -t /path_to_benchmark_file/benchmark.jmx -Jhost=magento2.dev -Jbase_path=/ -Jusers=100 -Jramp_period=300 -Jreport_save_path=./
+> jmeter -n -t /path_to_benchmark_file/benchmark.jmx -Jhost=magento2.local -Jbase_path=/ -Jusers=100 -Jramp_period=300 -Jreport_save_path=./
 
 2. Run via GUI
 -- Open jMeter/bin directory and run jmeter.bat
